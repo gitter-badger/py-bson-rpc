@@ -10,7 +10,7 @@ valid_msg1 = (b'{"id":"2","jsonrpc":"2.0","method":"sum",'
               b'"params":{"a":3,"b":4,"c":false}}')
 
 valid_msg2 = (b'{"id":"43","jsonrpc":"3.0","method":"toast","params":{'
-              b'"first":"tadaa","second":"tr\\u00e4d\\u00e4\\u00e4"}}')
+              b'"first":"tad\\"aa","se\\\\cond":"tr\\u00e4d\\u00e4\\u00e4"}}')
 
 valid_msg3 = (b'{"id":"msg-1","jsonrpc":"2.0","method":"foo",'
               b'"params":[1,2,3,4,5]}')
@@ -71,7 +71,7 @@ def test_rfc_7464_extract_broken():
 
 
 def test_netstring_extract():
-    raw_bytes = b'74:' + valid_msg1 + b',104:' + valid_msg2 + b',77:' + part_1
+    raw_bytes = b'74:' + valid_msg1 + b',108:' + valid_msg2 + b',77:' + part_1
     msg, raw_bytes = JSONFramingNetstring.extract_message(raw_bytes)
     assert msg == valid_msg1
     msg, raw_bytes = JSONFramingNetstring.extract_message(raw_bytes)
@@ -82,7 +82,7 @@ def test_netstring_extract():
 
 
 def test_netstring_extract_broken():
-    raw_bytes = b'104:' + valid_msg2 + b',23:' + valid_msg1
+    raw_bytes = b'108:' + valid_msg2 + b',23:' + valid_msg1
     msg, raw_bytes = JSONFramingNetstring.extract_message(raw_bytes)
     assert msg == valid_msg2
     with pytest.raises(FramingError):
@@ -91,4 +91,4 @@ def test_netstring_extract_broken():
 
 def test_netstring_frame():
     framed = JSONFramingNetstring.into_frame(valid_msg2)
-    assert framed == b'104:' + valid_msg2 + b','
+    assert framed == b'108:' + valid_msg2 + b','
