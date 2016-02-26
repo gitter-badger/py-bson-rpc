@@ -1,4 +1,6 @@
 # bsonrpc
+
+[![Join the chat at https://gitter.im/seprich/py-bson-rpc](https://badges.gitter.im/seprich/py-bson-rpc.svg)](https://gitter.im/seprich/py-bson-rpc?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![PyPI version](https://badge.fury.io/py/bsonrpc.svg)](https://badge.fury.io/py/bsonrpc)
 [![Build Status](https://travis-ci.org/seprich/py-bson-rpc.svg?branch=master)](https://travis-ci.org/seprich/py-bson-rpc)
 
